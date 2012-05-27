@@ -9,7 +9,7 @@ input: "cow",    output: displays a cow
 input: "quote",  output: displays a pony qoute
 input: "pony+",  output: displays a pony with a fortune-mod quote
 input: "cow+",   output: displays a cow with a fortune-mod quote
-input: "qoute+", output: displays a pony quote with the pony
+input: "quote+", output: displays a pony quote with the pony
 
 Prepending tty to the input will make the displayed ponies
 suitable for Linux VT (TTY), rather than 256 colour terminals.

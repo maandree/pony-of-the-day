@@ -6,9 +6,11 @@ but if UDP is used the following is done:
 
 input: "pony",   output: displays a pony
 input: "cow",    output: displays a cow
+input: "any",    output: displays a pony or cow
 input: "quote",  output: displays a pony qoute
 input: "pony+",  output: displays a pony with a fortune-mod quote
 input: "cow+",   output: displays a cow with a fortune-mod quote
+input: "any+",   output: displays a pony or cow with a fortune-mod quote
 input: "quote+", output: displays a pony quote with the pony
 
 Prepending tty to the input will make the displayed ponies

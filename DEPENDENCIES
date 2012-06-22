@@ -1,6 +1,7 @@
 java-runtime>=7
 
-fortune-mod
+pinkie-pie
+#depends on fortune-mod and ponypipe
 
 unisay>=1
 #unisay is not there yet, so development is extra slow right now...

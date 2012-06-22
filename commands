@@ -1,13 +1,13 @@
-:fortune
+:pinkie
 
 pony:unisay -r -N -T -w 70 -X -P -I -p unicode
 cow:unisay -r -N -T -w 70 -X -C -I -p unicode
 any:unisay -r -N -T -w 70 -X -A -I -p unicode
 quote:unisay -r -N -T -w 70 -X -q +I -p unicode
 
-pony+:fortune | unisay -r -N -T -w 70 -X -P -p unicode
-cow+:fortune | unisay -r -N -T -w 70 -X -C -p unicode
-any+:fortune | unisay -r -N -T -w 70 -X -A -p unicode
+pony+:pinkie | unisay -r -N -T -w 70 -X -P -p unicode
+cow+:pinkie | unisay -r -N -T -w 70 -X -C -p unicode
+any+:pinkie | unisay -r -N -T -w 70 -X -A -p unicode
 quote+:unisay -r -N -T -w 70 -X -q -p unicode
 
 ttypony:unisay -r -N -T -w 70 -V -P -I -p linux-vt
@@ -15,7 +15,7 @@ ttycow:unisay -r -N -T -w 70 -V -C -I -p linux-vt
 ttyany:unisay -r -N -T -w 70 -V -A -I -p linux-vt
 ttyquote:unisay -r -N -T -w 70 -V -q +I -p linux-vt
 
-ttypony+:fortune | unisay -r -N -T -w 70 -V -P -p linux-vt
-ttycow+:fortune | unisay -r -N -T -w 70 -V -C -p linux-vt
-ttyany+:fortune | unisay -r -N -T -w 70 -V -A -p linux-vt
+ttypony+:pinkie | unisay -r -N -T -w 70 -V -P -p linux-vt
+ttycow+:pinkie | unisay -r -N -T -w 70 -V -C -p linux-vt
+ttyany+:pinkie | unisay -r -N -T -w 70 -V -A -p linux-vt
 ttyquote+:unisay -r -N -T -w 70 -V -q -p linux-vt

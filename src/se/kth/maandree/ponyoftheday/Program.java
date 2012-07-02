@@ -15,9 +15,24 @@ public class Program
     public static final HashMap<String, String[][]> commands = new HashMap<>();
     
     
-    public static void main(final String... _args) throws Exception
+    public static void main(final String... args) throws Exception
     {
-	try (final InputStream is = new BufferedInputStream(new FileInputStream(new File("/usr/share/pony-of-the-day"))))
+	int _port = PORT;
+	int _interval = 12 * 60 * 60;
+	String _commands = "/usr/share/pony-of-the-day";
+	
+	for (int i = 0, n = args.length; i < n; i++)
+	    if      (args[i].equals("--port"))      _port     = Integer.parseInt(args[++i]);
+	    else if (args[i].equals("--interval"))  _interval = Integer.parseInt(args[++i]);
+	    else if (args[i].equals("--commands"))  _commands = args[++i];
+	
+	final int port = _port;
+	final long interval = _interval * 1000L;
+	final String commandsFile = _commands;
+	
+	final HashMap<InetAddress, long[]> timemap = new HashMap<>();
+	
+	try (final InputStream is = new BufferedInputStream(new FileInputStream(new File(commandsFile))))
 	{   try (final Scanner sc = new Scanner(is))
 	    {   while (sc.hasNextLine())
 		{   final String line = sc.nextLine();
@@ -35,7 +50,7 @@ public class Program
         (new Thread()
             {   @Override
                 public void run()
-        	{   try (final DatagramSocket socket = new DatagramSocket(PORT))
+        	{   try (final DatagramSocket socket = new DatagramSocket(port))
                     {   for (;;)
                         {   final byte[] buf = new byte[32];
                             final DatagramPacket packet = new DatagramPacket(buf, buf.length);
@@ -43,9 +58,14 @@ public class Program
                             (new Thread()
                	                {   @Override
 			            public void run()
-				    {   try (final DatagramSocket socket = new DatagramSocket(PORT))
+				    {   try (final DatagramSocket socket = new DatagramSocket(port))
 					{   for (;;)
-					    {   final String mode = new String(buf, 0, packet.getLength(), "UTF-8");
+					    {   final long now = System.currentTimeMillis();
+						final long[] last = timemap.get(packet.getAddress());
+						if ((last != null) && (now - last[0] < interval))
+						    continue;
+						timemap.put(packet.getAddress(), new long[] { now });
+						final String mode = new String(buf, 0, packet.getLength(), "UTF-8");
 						final byte[] ret = exec(mode);
 						socket.send(new DatagramPacket(ret, ret.length, packet.getSocketAddress()));
 				        }   }
@@ -59,14 +79,19 @@ public class Program
 	    }   }   }
 	    ).start();
 	
-	try (final ServerSocket servsock = new ServerSocket(PORT))
+	try (final ServerSocket servsock = new ServerSocket(port))
 	{   for (;;)
 	    {   final Socket socket = servsock.accept();
 	        (new Thread()
 		    {   @Override
 		        public void run()
 		        {   try (final OutputStream os = socket.getOutputStream())
-			    {   os.write(exec("default"));
+			    {   final long now = System.currentTimeMillis();
+				final long[] last = timemap.get(socket.getInetAddress());
+				if ((last != null) && (now - last[0] < interval))
+				    return;
+				timemap.put(socket.getInetAddress(), new long[] { now });
+				os.write(exec("default"));
 				os.flush();
 			    }
 			    catch (final Throwable err)

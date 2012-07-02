@@ -25,7 +25,7 @@ public class Program
 			continue;
 		    String[] strs = (line.startsWith(":") ? ("default" + line) : line).split(":");
 		    final String key = strs[0];
-		    strs = strs[1].replace(" | ", "|").split("|");
+		    strs = strs[1].replace(" | ", "|").split("\\|");
 		    final String[][] value = new String[strs.length][];
 		    for (int i = 0, n = strs.length; i < n; i++)
 			value[i] = strs[i].split(" ");
@@ -50,12 +50,12 @@ public class Program
 						socket.send(new DatagramPacket(ret, ret.length, packet.getSocketAddress()));
 				        }   }
 					catch (final Throwable err)
-					{   //Do nothing
+					{   err.printStackTrace(System.err);
 				}   }   }
 				).start();
 		    }   }
 		    catch (final Throwable err)
-		    {   //Do nothing
+		    {   err.printStackTrace(System.err);
 	    }   }   }
 	    ).start();
 	
@@ -70,7 +70,7 @@ public class Program
 				os.flush();
 			    }
 			    catch (final Throwable err)
-			    {   //Do nothing
+			    {   err.printStackTrace(System.err);
 			    }
 			    finally
 			    {   try

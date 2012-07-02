@@ -1,1 +1,3 @@
-java -jar "$0".jar "$@"
+java7 -version 2>/dev/null >/dev/null  &&  java7 -jar "$0".jar "$@"
+java7 -version 2>/dev/null >/dev/null  ||  java  -jar "$0".jar "$@"
+

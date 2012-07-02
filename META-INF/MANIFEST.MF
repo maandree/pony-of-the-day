@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Created-By: Mattias Andrée
+Main-Class: se.kth.maandree.ponyoftheday.Program

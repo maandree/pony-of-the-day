@@ -2,7 +2,7 @@ all: ponyoftheday
 
 ponyoftheday:
 	javac7 -source 7 -target 7 -cp . -s src -d . src/se/kth/maandree/ponyoftheday/Program.java || javac -source 7 -target 7 -cp . -s src -d . src/se/kth/maandree/ponyoftheday/Program.java
-	jar7 -cfm pony-of-the-day.jar META-INF/MANIFAST.MF se/kth/maandree/ponyoftheday/Program.class || jar -cfm pony-of-the-day.jar META-INF/MANIFAST.MF se/kth/maandree/ponyoftheday/Program.class
+	jar7 -cfm pony-of-the-day.jar META-INF/MANIFEST.MF se/kth/maandree/ponyoftheday/Program.class || jar -cfm pony-of-the-day.jar META-INF/MANIFEST.MF se/kth/maandree/ponyoftheday/Program.class
 
 install: all
 	install -d "${DESTDIR}/usr/bin"

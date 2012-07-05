@@ -12,7 +12,7 @@ public class Program
     public static final int PORT = 17;
     
     
-    public static final HashMap<String, String[][]> commands = new HashMap<>();
+    public static final HashMap<String, String[][]> commands = new HashMap<String, String[][]>();
     
     
     public static void main(final String... args) throws Exception
@@ -30,7 +30,7 @@ public class Program
 	final long interval = _interval * 1000L;
 	final String commandsFile = _commands;
 	
-	final HashMap<InetAddress, long[]> timemap = new HashMap<>();
+	final HashMap<InetAddress, long[]> timemap = new HashMap<InetAddress, long[]>();
 	
 	try (final InputStream is = new BufferedInputStream(new FileInputStream(new File(commandsFile))))
 	{   try (final Scanner sc = new Scanner(is))

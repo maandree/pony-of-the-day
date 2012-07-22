@@ -1,5 +1,5 @@
 # Maintainer: Mattias Andrée <maandree@operamail.com>
-pkgname=pony-of-the-day-git
+pkgname=pony-of-the-day
 pkgver=1.0
 pkgrel=1
 pkgdesc="Server using Quote of the Day protocol and can send my little ponies"
